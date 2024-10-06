@@ -1,115 +1,105 @@
-import Image from "next/image";
-import localFont from "next/font/local";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import { useState } from "react";
+import Head from "next/head";
+import { PlayIcon } from "@heroicons/react/24/solid";
+import FeatureSection from "../components/FeatureSection";
 
 export default function Home() {
-  return (
-    <div
-      className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/pages/index.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [isPlaying, setIsPlaying] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+  const toggleVideo = () => {
+    setIsPlaying(!isPlaying);
+  };
+
+  return (
+    <div className="bg-blue-600 min-h-screen text-white">
+      <Head>
+        <title>スバラシイ - 革新的な空気清浄機</title>
+        <meta
+          name="description"
+          content="スバラシイ - 革新的な空気清浄機。あなたの生活を変える、驚きの空気清浄テクノロジー。"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <main>
+        <section
+          className="relative h-screen bg-cover bg-center"
+          style={{ backgroundImage: "url('/placeholder.svg')" }}
+        >
+          <div className="absolute inset-0 bg-blue-600 bg-opacity-50"></div>
+          <div className="container mx-auto px-4 h-full flex items-center justify-center relative z-10">
+            <div className="writing-vertical-rl text-right">
+              <h1 className="text-6xl font-bold mb-4 transform duration-300 ">
+                驚く。
+              </h1>
+              <p className="text-2xl mb-8">愛用者代表 有名人</p>
+              <a
+                href="#"
+                className="bg-white text-blue-600 px-8 py-3 rounded-full font-bold hover:bg-blue-100 transition inline-block"
+              >
+                詳細を見る
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white text-blue-600 py-12">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold mb-8 text-center">MOVIE</h2>
+            <div className="relative w-full aspect-video bg-gray-200 rounded-lg overflow-hidden">
+              {isPlaying ? (
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                  frameBorder="0"
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen
+                ></iframe>
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <button
+                    onClick={toggleVideo}
+                    className="bg-blue-600 text-white rounded-full p-4 hover:bg-blue-700 transition duration-300"
+                  >
+                    <PlayIcon className="h-12 w-12" />
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+
+        <section id="features" className="py-12">
+          <div className="container mx-auto px-4">
+            <FeatureSection
+              id="1"
+              title="軽い"
+              description="シリーズ最軽量の220グラム"
+              subDescription="ドクターエアガンシリーズにおいて"
+              imageSrc="/placeholder.svg"
+              imageAlt="軽量デモンストレーション"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+            <FeatureSection
+              id="2"
+              title="パワフル"
+              description="最大約3,000回/分の衝撃性振動"
+              subDescription="ブラシレスモーター搭載"
+              imageSrc="/placeholder.svg"
+              imageAlt="パワフルデモンストレーション"
+              isReversed
+            />
+            <FeatureSection
+              id="3"
+              title="コンパクト"
+              description="シリーズ最小のポケットサイズ"
+              subDescription=""
+              imageSrc="/placeholder.svg"
+              imageAlt="コンパクトデモンストレーション"
+            />
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
